@@ -1,0 +1,12 @@
+.little-point{
+    border: 1px solid black;
+    width: 14px;
+    height: 14px;
+
+    border-radius:7px;
+
+    display: inline-block;
+    margin: 4px 5px;
+
+    background-color: rgb(59, 59, 59);
+}

@@ -4,5 +4,8 @@
 
     border-radius:25px;
 
-    background-color: red;
+    background-color: rgb(59, 59, 59);
+
+    box-sizing:border-box;
+
 }

@@ -1,9 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 
-import Home from './pages/Home/Home'
+import App from './App';
+import Groove from './component/Groove/Groove';
+import GameBoard from './component/GameBoard/GameBoard';
+
+import { DndProvider } from 'react-dnd';
+import HTML5Backend  from 'react-dnd-html5-backend'
+
 
 //将Square类替换成下面的函数
 function Square(props){
@@ -78,6 +83,7 @@ class Game extends React.Component {
       <div className="game">
         <div className="game-board">
           <Board />
+          <GameBoard  />,
         </div>
         <div className="game-info">
           <div>{/* status */}</div>
@@ -89,8 +95,10 @@ class Game extends React.Component {
 }
 
 ReactDOM.render(
-  <Game />,
-  <Home />,
+
+
+    <Game />,
+
   document.getElementById('root')
 );
 
