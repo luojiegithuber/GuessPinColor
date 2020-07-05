@@ -94,7 +94,7 @@ function GameBoard(props){
         //setResult(newResult);
 
         if (window.confirm("是否确认重新开始？")) {
-            window.location.replace("http://localhost:3000/")//刷新页面
+            window.location.replace("http://www.luojiework.cn:8019/")//刷新页面
         } else {
 
         }
