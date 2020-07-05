@@ -2,13 +2,20 @@ import React , {useEffect, useState, useImperativeHandle} from 'react'
 import './Groove.css';
 import ReactDOM from 'react-dom';
 
-function Groove(props){
+function Groove(props,ref){
     const [color, setColor] = useState("white");
     const [colorCode, setColorCode] = useState("#000");
-    
+    //const [flagOne, setFlagOne] = useState(true);
+  
+
+    useImperativeHandle(ref, () => ({
+      getColor:() => color,
+    }));
+
+
     useEffect(() => {
-      setColor(props.color)
-    });
+        setColor(props.color);
+    },[]);
 
     
     const domdrugstart = (color,ev) => {
@@ -28,8 +35,8 @@ function Groove(props){
       ev.preventDefault();
       ev.target.style.border = '';
       let curColor = ev.dataTransfer.getData("color");
-      console.log(curColor.toString())
       ev.target.style.backgroundColor = curColor;
+      setColor(curColor.toString());
     };
 
     const allowDrop = (ev) => {
@@ -37,12 +44,10 @@ function Groove(props){
     };
 
 
-
-
-
     return (
       props.isDraggable?
         <div 
+        ref={ref}
         id={props.id}
         className="groove" 
         onClick={props.onClick}
@@ -53,21 +58,27 @@ function Groove(props){
         />
         :
         props.isCurStep?
-        <div 
+        <div
+        ref={ref} 
         className="groove" 
         onClick={props.onClick}
         onDragEnter={dragenter.bind(this)}
         onDragLeave={dragleave.bind(this)}
         onDrop={drop.bind(this)}
         onDragOver={allowDrop.bind(this)}
+        style={{backgroundColor:color}}
         />
         :
         <div 
+        ref={ref}
         className="groove" 
+        onClick={props.onClick}
+        style={{backgroundColor:color}}
         />
 
-      )
+      );
 
 }
 
+Groove = React.forwardRef(Groove);
 export default Groove;
