@@ -1,8 +1,11 @@
-import React , {useEffect, useState,useRef} from 'react'
+import React , {useEffect, useState,useRef,Popconfirm} from 'react'
+//import {QuestionCircleOutlined} from '@ant-design/icons';
 import './GameBoard.css';
 import HintPanel from '../HintPanel/HintPanel';
 import Groove from '../Groove/Groove';
-import { Button } from 'antd';
+import PlayerPanel from '../PlayerPanel/PlayerPanel';
+
+import { Button, message,Tooltip } from 'antd';
 import Element from 'antd/lib/skeleton/Element';
 
 
@@ -77,7 +80,7 @@ function GameBoard(props){
     ];
 
     useEffect(() => {
-        console.log("当前答案",result)
+        //console.log("当前答案",result)
     });
 
 
@@ -86,9 +89,29 @@ function GameBoard(props){
     //重置游戏
     const resetGame = () => {
         
-        let newResult = randomResult();
+        //let newResult = randomResult();
         //console.log("新的答案",newResult)
-        setResult(newResult);
+        //setResult(newResult);
+
+        if (window.confirm("是否确认重新开始？")) {
+            window.location.replace("http://localhost:3000/")//刷新页面
+        } else {
+
+        }
+
+    }
+
+    //直接看答案
+    const resetSee = () => {
+    
+
+        if (window.confirm("是否确认直接看答案？")) {
+            setStepNum(9);
+            setIsAllowConfirm(false);
+            setResultCoverClass("resultCover-end")
+        } else {
+
+        }
 
     }
 
@@ -98,7 +121,7 @@ function GameBoard(props){
         let halfCorrect = 0;
         
         console.log('你的答案',curHintPanetResult);
-        console.log('标准答案',result);
+        //console.log('标准答案',result);
 
         //判断【全对】【半对】
         result.map((value,index) => {
@@ -114,7 +137,12 @@ function GameBoard(props){
         HintPanel_num.current.getCorrectNum(fullCorrect,halfCorrect);//用于更新四点小面板
 
         if(fullCorrect===4){
-            console.log("你胜利了，游戏结束");
+            if(stepNum%2==0){
+                message.success('红方获得胜利，游戏结束');
+            }else{
+                message.success('蓝方获得胜利，游戏结束');
+            }
+
             setStepNum(9);
             setIsAllowConfirm(false);
             setResultCoverClass("resultCover-end")
@@ -138,7 +166,7 @@ function GameBoard(props){
         //forEach是异步的！
         for(let i = 0;i<curHintPanetResult.length;i++){
             if(!curHintPanetResult[i]){
-                console.log("请填上四颗棋子！");
+                message.error('请放入四颗棋子！不要有空缺');
                 setStepNum(stepNum);
                 return false;
             }
@@ -193,12 +221,13 @@ function GameBoard(props){
         //HintPanelGroup[stepNum].current.clearUpHintResult();
        
         if(stepNum<=8){
-            setStepNum(stepNum + 1);
+            
+            setTimeout(()=>{setStepNum(stepNum + 1);},2000);
             HintPanetToResultByStepName(stepNum);//setState更新的异步问题，此处的stepNum没有+1
             
             if(stepNum==8){
-                console.log("玩家操作结束")
-                console.log(myResult)
+                message.warning('操作流程终止，打成平局o(╥﹏╥)o');
+                //console.log(myResult)
                 setIsAllowConfirm(false);//终止操作流程
                 setResultCoverClass("resultCover-end");//开启盖子动画
             }
@@ -206,7 +235,20 @@ function GameBoard(props){
 
 
     };
-  
+
+    const confirmPopconfirm = () => {
+
+    };  
+
+    const cancelPopconfirm = () => {
+
+    };
+
+    const jump = () => {
+
+        //window.location.href="https://www.3dmgame.com/gl/3811106.html";
+        window.open("https://www.3dmgame.com/gl/3811106.html")
+    };
 
     return (
         <div 
@@ -214,10 +256,12 @@ function GameBoard(props){
         >
 
             <div className="player-panel">
-                <div className="blue-panel"></div>
-                <div className="game-timer">120</div>
-                <div className="red-panel"></div>
+                <PlayerPanel group="蓝方" name="帅气的蓝方" />
+                <div className="game-timer">∞</div>
+                <PlayerPanel group="红方" name="可爱的红方" />
             </div>
+
+            <hr style={{width:"800px",backgroundColor:"black"}}/>
 
             <div className="showChess">
                 <HintPanel panelId='1' curStep={stepNum} ref={HintPanel_1}/>
@@ -246,6 +290,9 @@ function GameBoard(props){
             </div>
 
             <div class="pieces-operate" style={{display:"flex",alignItems:"center",justifyContent:"space-around"}}>
+
+                <Button type="primary" size="large" shape="round" onClick={confirm}>确认</Button>
+
                 <div className="pieces">
                     <Groove color="blue" isDraggable="true"/>
                     <Groove color="red" isDraggable="true"/>
@@ -254,11 +301,22 @@ function GameBoard(props){
                     <Groove color="pink" isDraggable="true"/>
                     <Groove color="white" isDraggable="true"/>
                 </div>
-                <Button type="primary" size="large" shape="round" onClick={confirm}
-                >确认</Button>
-                <Button type="primary" size="large" shape="round" onClick={resetGame} danger>重新开始</Button>
-            </div>
 
+
+                <Tooltip title="重新开始">
+                    <Button type="primary" size="middle" shape="circle" onClick={resetGame} danger>Re</Button>
+                </Tooltip>
+                <Tooltip title="直接查看答案，结束游戏">
+                <Button type="primary" size="middle" shape="circle" style={{backgroundColor:"#FFA500",borderColor:"#FFA500"}} onClick={resetSee} danger>End</Button>
+                </Tooltip>
+                <Tooltip title="教程">
+                    <Button type="primary" size="middle" shape="circle" style={{color:"#000",backgroundColor:"#fff",borderColor:"#fff",paddingLeft:"5px"}}  onClick={jump}  >
+                        <a src="https://www.3dmgame.com/gl/3811106.html">？</a>
+                    </Button>
+                </Tooltip>
+               
+            </div>
+            
 
         </div>
       )

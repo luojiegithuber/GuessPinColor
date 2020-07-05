@@ -9,6 +9,7 @@ import GameBoard from './component/GameBoard/GameBoard';
 import { DndProvider } from 'react-dnd';
 import HTML5Backend  from 'react-dnd-html5-backend'
 
+document.title = "基于React的猜颜色游戏";
 
 //将Square类替换成下面的函数
 function Square(props){
@@ -97,7 +98,7 @@ class Game extends React.Component {
 ReactDOM.render(
 
 
-    <Game />,
+    <GameBoard />,
 
   document.getElementById('root')
 );

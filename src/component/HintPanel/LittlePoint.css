@@ -10,3 +10,53 @@
 
     background-color: rgb(59, 59, 59);
 }
+
+.little-point-full{
+
+    width: 14px;
+    height: 14px;
+
+    border-radius:7px;
+
+    display: inline-block;
+    margin: 4px 5px;
+
+    background-color: rgb(255, 122, 21);
+    box-shadow: 0px 0px 2px 2px rgba(255, 122, 21, 0.5);
+
+    animation:full-light 2s;
+}
+
+
+
+
+@keyframes full-light
+{
+0% {background-color: rgb(59, 59, 59);box-shadow: 0px 0px 2px 2px rgba(255, 122, 21, 0)}
+25% {background-color: rgb(59, 59, 59);box-shadow: 0px 0px 2px 2px rgba(255, 122, 21, 0)}
+100% {background-color: rgb(255, 122, 21);box-shadow: 0px 0px 2px 2px rgba(255, 122, 21, 0.5)}
+}
+
+
+.little-point-half{
+
+    width: 14px;
+    height: 14px;
+
+    border-radius:7px;
+
+    display: inline-block;
+    margin: 4px 5px;
+
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 2px 2px rgba(255, 255, 255, 0.5);
+
+    animation:half-light 2s;
+}
+
+@keyframes half-light
+{
+0% {background-color: rgb(59, 59, 59);box-shadow: 0px 0px 2px 2px rgba(255, 255, 255, 0)}
+25% {background-color: rgb(59, 59, 59);box-shadow: 0px 0px 2px 2px rgba(255, 255, 255, 0)}
+100% {background-color: rgb(255, 255, 255);box-shadow: 0px 0px 2px 2px rgba(255, 255, 255, 0.5)}
+}

@@ -16,7 +16,8 @@
     color: rgb(0, 0, 0);
     background-color: rgb(184, 184, 184);
 
-    box-shadow: 2px 5px 5px rgba(0,0,0,0.8)/*blur值为15px*/ ;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.6);
+    opacity: 1;
 
 }
 .little-panel{
@@ -32,6 +33,6 @@
 
     display: flex;
     flex-wrap: wrap;
-    box-shadow: 2px 5px 5px rgba(0,0,0,0.8)/*blur值为15px*/ 
+    box-shadow: 2px 5px 5px rgba(0,0,0,0.8)
     
 }

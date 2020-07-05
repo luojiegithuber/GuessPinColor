@@ -64,3 +64,14 @@ ol, ul {
 .game-info {
   margin-left: 20px;
 }
+
+#root{
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-image: url('./imgs/universe.jpg');
+}

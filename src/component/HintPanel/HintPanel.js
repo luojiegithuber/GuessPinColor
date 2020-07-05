@@ -66,10 +66,10 @@ function HintPanel(props,ref){
         setPanelId(props.panelId);
         setCurStep(props.curStep);
 
-        let highlightColor = parseInt(props.panelId)%2==0?"	#FF6347":"#00FFFF"
+        let highlightColor = parseInt(props.panelId)%2==0?"	#ff4d4f":"#00FFFF"
         setFontColor(props.curStep==props.panelId?highlightColor:"grey")
 
-        let textShadow = parseInt(props.panelId)%2==0?"0 0 0.5em #FF6347,0 0 0.5em #FF6347":"0 0 0.5em #00FFFF	,0 0 0.5em 	#00FFFF"
+        let textShadow = parseInt(props.panelId)%2==0?"0 0 0.5em #ff4d4f,0 0 0.5em #ff4d4f":"0 0 0.5em #00FFFF	,0 0 0.5em 	#00FFFF"
         setTextShadow(props.curStep==props.panelId?textShadow:"")
 
     });
