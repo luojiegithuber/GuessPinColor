@@ -69,6 +69,14 @@ function Groove(props,ref){
         style={{backgroundColor:color}}
         />
         :
+        props.isResult?
+        <div 
+        ref={ref}
+        className="groove" 
+        onClick={props.onClick}
+        style={{backgroundColor:props.color}}
+        />
+        :
         <div 
         ref={ref}
         className="groove" 

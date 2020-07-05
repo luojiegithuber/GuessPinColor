@@ -1,7 +1,7 @@
 .chess-board{
     border: 1px solid black;
-    width: 800px;
-    height: 450px;
+    width: 900px;
+    height: 700px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -9,6 +9,43 @@
     background-color: rgb(201, 201, 201);
     border-radius:15px;
     
+}
+.game-timer{
+    font-size: 30px;
+    font-weight:bold;
+    color: rgb(255, 255, 255);
+    text-shadow: 0 0 0.5em rgb(255, 255, 255);
+}
+
+.player-panel{
+
+    width: 800px;
+    height: 150px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-left: 50px;
+}
+
+.blue-panel{
+    border: 1px solid black;
+    border-radius:25px;
+    background-color: rgb(162, 162, 162);
+    width: 350px;
+    height: 150px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.red-panel{
+    border: 1px solid black;
+    border-radius:25px;
+    background-color: rgb(162, 162, 162);
+    width: 350px;
+    height: 150px;
+    display: flex;
+    justify-content: space-around;
 }
 
 .showChess{
@@ -18,9 +55,66 @@
     align-items: center;
 }
 
+.resultCover{
+    /*border: 1px solid black;*/
+    width: 80px;
+    height: 300px;
+
+    background-color: rgb(162, 162, 162);
+    box-shadow: -2px 5px 5px rgba(0,0,0,0.8)/*blur值为15px*/ ;
+
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.8em;
+
+
+}
+
+.resultCover-end{
+    /*border: 1px solid black;*/
+    width: 80px;
+    height: 300px;
+
+    background-color: rgb(162, 162, 162);
+    box-shadow: -2px 5px 5px rgba(0,0,0,0.8)/*blur值为15px*/ ;
+
+    position: absolute;
+    top: 0px;
+    left: 85px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.8em;
+
+    color: rgb(136, 205, 255);
+    text-shadow: 0 0 0.5em rgb(136, 205, 255);
+
+    animation:opencover 5s;
+
+    animation-fill-mode:forwards; /*动画结束后保持不变*/
+}
+
+@keyframes opencover
+{
+0% {left: 0px;}
+25% {left: 0px;}
+100% {left: 85px;}
+}
 
 .result{
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     width: 80px;
     height: 300px;
 
@@ -32,7 +126,11 @@
     padding: 5px 0px;
     border-radius:40px;
 
-    background-color: #fff;
+    background-color: rgb(128, 128, 128);
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.8) inset;
+    position: relative;
+
+    overflow: hidden;
 }
 
 .result-hint{
@@ -52,7 +150,7 @@
 
 .pieces{
 
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     border-radius:30px;
 
     display: flex;
@@ -62,5 +160,6 @@
     padding: 10px;
 
     background-color:rgb(156, 156, 156);
+    box-shadow: 2px 5px 5px rgba(0,0,0,0.8)/*blur值为15px*/ 
 
 }

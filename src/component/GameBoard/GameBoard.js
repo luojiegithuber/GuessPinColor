@@ -8,7 +8,7 @@ import Element from 'antd/lib/skeleton/Element';
 
 function GameBoard(props){
 
-
+    //洗牌算法
     Array.prototype.shuffle = function () {
         let arr = this;
         for (let i = arr.length - 1; i >= 0; i--) {
@@ -25,6 +25,7 @@ function GameBoard(props){
         return arr;
     }
 
+    //所有游戏结果的数组
     const allColor = ["white","blue","red","yellow","pink","green"];
 
     //随机确定一个结果
@@ -51,6 +52,7 @@ function GameBoard(props){
     const [result, setResult] = useState(firstResult);
     const [myResult, setMyResult] = useState([]);
     const [isAllowConfirm, setIsAllowConfirm] = useState(true);
+    const [resultCoverClass, setResultCoverClass] = useState("resultCover");
 
 
     const HintPanel_1 = useRef(null);
@@ -75,7 +77,7 @@ function GameBoard(props){
     ];
 
     useEffect(() => {
-        
+        console.log("当前答案",result)
     });
 
 
@@ -85,8 +87,9 @@ function GameBoard(props){
     const resetGame = () => {
         
         let newResult = randomResult();
-        console.log("新的答案",newResult)
+        //console.log("新的答案",newResult)
         setResult(newResult);
+
     }
 
     //将目前的结果与最终结果对比，得到【全对】、【半对】的个数
@@ -114,6 +117,7 @@ function GameBoard(props){
             console.log("你胜利了，游戏结束");
             setStepNum(9);
             setIsAllowConfirm(false);
+            setResultCoverClass("resultCover-end")
         }
     }
 
@@ -196,6 +200,7 @@ function GameBoard(props){
                 console.log("玩家操作结束")
                 console.log(myResult)
                 setIsAllowConfirm(false);//终止操作流程
+                setResultCoverClass("resultCover-end");//开启盖子动画
             }
         }
 
@@ -207,6 +212,13 @@ function GameBoard(props){
         <div 
         className="chess-board" 
         >
+
+            <div className="player-panel">
+                <div className="blue-panel"></div>
+                <div className="game-timer">120</div>
+                <div className="red-panel"></div>
+            </div>
+
             <div className="showChess">
                 <HintPanel panelId='1' curStep={stepNum} ref={HintPanel_1}/>
                 <HintPanel panelId='2' curStep={stepNum} ref={HintPanel_2}/>
@@ -217,12 +229,18 @@ function GameBoard(props){
                 <HintPanel panelId='7' curStep={stepNum} ref={HintPanel_7}/>
                 <HintPanel panelId='8' curStep={stepNum} ref={HintPanel_8}/>
 
+                
                 <div className="result">
-
-                    <Groove/>
-                    <Groove/>
-                    <Groove/>
-                    <Groove/>
+                    <div className={resultCoverClass}>
+                        <p>答</p>
+                        <p>案</p>
+                        <p>盖</p>
+                        <p>子</p>
+                    </div>
+                    <Groove color={result[0]} isResult="true"/>
+                    <Groove color={result[1]} isResult="true"/>
+                    <Groove color={result[2]} isResult="true"/>
+                    <Groove color={result[3]} isResult="true"/>
                 </div>
 
             </div>

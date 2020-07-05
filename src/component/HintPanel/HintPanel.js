@@ -6,7 +6,8 @@ import LittlePoint from './LittlePoint';
 function HintPanel(props,ref){
     const [panelId, setPanelId] = useState(0);
     const [curStep, setCurStep] = useState(0);
-    const [fontColor, setFontColor] = useState("white");
+    const [fontColor, setFontColor] = useState("black");
+    const [textShadow, setTextShadow] = useState("");
     const [hintResult, setHintResult] = useState(['','','','']);
     const [arrLittlePointvType, setArrLittlePointvType] = useState(['','','','']);
 
@@ -16,13 +17,14 @@ function HintPanel(props,ref){
     const childRef_4 = useRef(null);
 
    
+    //text-shadow: 0 0 0.5em #87F,0 0 0.5em #87F
 
     useImperativeHandle(ref, () => ({
         
         //整理球球冒泡出来的结果
         clearUpHintResult:() => {
             //如果是当前面板,就做整理
-            if(fontColor==="blue"){
+            if(props.curStep==props.panelId){
                 let hintResult = [
                     childRef_1.current.getColor(),
                     childRef_2.current.getColor(),
@@ -63,14 +65,19 @@ function HintPanel(props,ref){
     useEffect(() => {
         setPanelId(props.panelId);
         setCurStep(props.curStep);
-        setFontColor(props.curStep==props.panelId?"blue":"white")
+
+        let highlightColor = parseInt(props.panelId)%2==0?"	#FF6347":"#00FFFF"
+        setFontColor(props.curStep==props.panelId?highlightColor:"grey")
+
+        let textShadow = parseInt(props.panelId)%2==0?"0 0 0.5em #FF6347,0 0 0.5em #FF6347":"0 0 0.5em #00FFFF	,0 0 0.5em 	#00FFFF"
+        setTextShadow(props.curStep==props.panelId?textShadow:"")
 
     });
 
 
     return (
         <div 
-        className="hint-panel" style={{color:fontColor}}
+        className="hint-panel" style={{color:fontColor,textShadow:textShadow}}
         >
             {panelId}
         
@@ -81,10 +88,10 @@ function HintPanel(props,ref){
                 <LittlePoint type={arrLittlePointvType[3]}/>
             </div>
 
-            <Groove isCurStep={fontColor=="blue"} ref={childRef_1}/>
-            <Groove isCurStep={fontColor=="blue"} ref={childRef_2}/>
-            <Groove isCurStep={fontColor=="blue"} ref={childRef_3}/>
-            <Groove isCurStep={fontColor=="blue"} ref={childRef_4}/>
+            <Groove isCurStep={(props.curStep==props.panelId)} ref={childRef_1}/>
+            <Groove isCurStep={(props.curStep==props.panelId)} ref={childRef_2}/>
+            <Groove isCurStep={(props.curStep==props.panelId)} ref={childRef_3}/>
+            <Groove isCurStep={(props.curStep==props.panelId)} ref={childRef_4}/>
 
         </div>
       )
