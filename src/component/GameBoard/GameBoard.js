@@ -172,6 +172,10 @@ function GameBoard(props){
             }
         }
 
+        setTimeout(()=>{setStepNum(stepNum + 1);},2000);
+
+        
+
         temp.push(curHintPanetResult)
 
         setMyResult(temp);
@@ -222,7 +226,7 @@ function GameBoard(props){
        
         if(stepNum<=8){
             
-            setTimeout(()=>{setStepNum(stepNum + 1);},2000);
+            
             HintPanetToResultByStepName(stepNum);//setState更新的异步问题，此处的stepNum没有+1
             
             if(stepNum==8){
