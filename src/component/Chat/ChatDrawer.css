@@ -1,0 +1,13 @@
+#chat{
+    position: fixed;
+    right: 10%;
+    bottom: 10%;
+}
+
+#msg-panel{
+    padding: 10px;
+    border: 1px solid #f2f2f2;
+    height: 80%;
+    overflow-y: scroll;
+    background-color: #fcfcfc;
+}

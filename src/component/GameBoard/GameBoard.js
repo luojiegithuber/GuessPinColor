@@ -4,10 +4,10 @@ import './GameBoard.css';
 import HintPanel from '../HintPanel/HintPanel';
 import Groove from '../Groove/Groove';
 import PlayerPanel from '../PlayerPanel/PlayerPanel';
+import ChatDrawer from '../Chat/ChatDrawer';
 
-import { Button, message,Tooltip } from 'antd';
+import { Button, message,Tooltip,Drawer } from 'antd';
 import Element from 'antd/lib/skeleton/Element';
-
 
 function GameBoard(props){
 
@@ -320,6 +320,7 @@ function GameBoard(props){
                 </Tooltip>
                
             </div>
+            <ChatDrawer/>
             
 
         </div>
